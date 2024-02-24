@@ -3,6 +3,8 @@ import { useAuth } from '@/stores'
 import Login from '@/views/pages/Login.vue'
 import Home from '@/views/pages/Home.vue'
 
+import Brands from '@/views/pages/brands/Brands.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,7 +23,7 @@ const router = createRouter({
     {
       path: '/brands',
       name: 'brand-list',
-      component: Brand,
+      component: Brands,
       meta: { title: 'Brand', requiresAuth: true}
     },
   ]
