@@ -4,6 +4,8 @@ import Login from '@/views/pages/Login.vue'
 import Home from '@/views/pages/Home.vue'
 
 import Brands from '@/views/pages/brands/Brands.vue'
+import BrandAdd from '@/views/pages/brands/BrandAdd.vue'
+import BrandEdit from '@/views/pages/brands/BrandEdit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +27,18 @@ const router = createRouter({
       name: 'brand-list',
       component: Brands,
       meta: { title: 'Brand', requiresAuth: true}
+    },
+    {
+      path: '/brand-add',
+      name: 'brand-add',
+      component: BrandAdd,
+      meta: { title: 'Brand Add', requiresAuth: true}
+    },
+    {
+      path: '/brand-edit/:id',
+      name: 'brand-edit',
+      component: BrandEdit,
+      meta: { title: 'Brand Edit', requiresAuth: true}
     },
   ]
 })

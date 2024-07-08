@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import {Layout, GuestLayout} from '@/views/common';
 import { useAuth } from './stores';
 const auth = useAuth();
-
+console.log(auth.getAuthStatus);
 </script>
 
 <template>

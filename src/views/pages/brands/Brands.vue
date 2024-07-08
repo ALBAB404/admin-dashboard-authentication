@@ -1,14 +1,19 @@
 <script setup>
-import {  useBrands } from '@/stores'
+import {  useCommons } from '@/stores'
 import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 
 
-const brand          = useBrands();
-const { brands }     = storeToRefs(brand);
+const common = useCommons();
+const brands = ref('');
+
+const getBrandsData = async () => {
+  const res = await common.getCommonData('/admin/brands');
+  brands.value = res
+}
 
 onMounted(() => {
-    brand.getBrands();
+  getBrandsData();
 })
 
 </script>
@@ -33,12 +38,13 @@ onMounted(() => {
                   </thead>
                   <tbody>
                   <tr v-for="(brand, index) in brands.data" :key="index">
+                    <!-- {{ brand }} -->
                     <td>{{ index + 1 }}</td>
                     <td><img :src="brand.image" alt="" width="50"></td>
                     <td>{{ brand.name }}</td>
                     <td><span :class="{'active-status' : brand.status=='active', 'inactive-status': brand.status=='inactive'}">{{ brand.status }}</span></td>
                     <td>
-                        <router-link  class="btn btn-info btn-sm mr-2">
+                        <router-link :to="{name: 'brand-edit', params: {id : brand.id} }" class="btn btn-info btn-sm mr-2">
                             <i class="fas fa-edit"></i>
                         </router-link>
                         <a href="javascript::void(0)" class="btn btn-danger btn-sm" v-if="deleteLoder == brand.id"><i class="fas fa-spinner fa-spin"></i></a>

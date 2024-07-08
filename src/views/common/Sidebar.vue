@@ -1,10 +1,11 @@
 <script setup>
 import { useAuth, useNotification } from '@/stores'
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const router = useRouter();
 const auth   = useAuth();
-
+const isOpen = ref(false);
 
 const logoutMethod = async() => {
   const res = await auth.logout();
@@ -42,7 +43,7 @@ const logoutMethod = async() => {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+          <li class="nav-item menu-is-opening menu-open" @click="isOpen = !isOpen">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -50,7 +51,7 @@ const logoutMethod = async() => {
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" :style="{ display: isOpen ? 'block' : 'none' }">
               <li class="nav-item">
                 <router-link :to="{name: 'brand-list'}" href="./index.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
@@ -58,10 +59,10 @@ const logoutMethod = async() => {
                 </router-link>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <router-link :to="{name: 'brand-add'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
+                  <p>Brand Add</p>
+                </router-link>
               </li>
               <li class="nav-item">
                 <a href="./index3.html" class="nav-link">
